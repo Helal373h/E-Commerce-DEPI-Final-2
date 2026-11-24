@@ -3,7 +3,7 @@ import MainCartLayout2Columns from "./components/MainCartLayout2Columns";
 import PairsWellWithAddOnCarouselSection from "./components/PairsWellWithAddOnCarouselSection";
 import placeholder0 from "/src/assets/Shopcart/placeholder0.png";
 
-export default function URBANOVAShoppingCartTouchFlow() {
+export default function ShopCartPage() {
     const [CartItems, setCartItems] = useState([
         {
             id: 0,

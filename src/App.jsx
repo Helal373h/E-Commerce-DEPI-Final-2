@@ -5,9 +5,12 @@ import URBANOVAShoppingCartTouchFlow from "./pages/Shopcart/URBANOVAShoppingCart
 
 function App() {
     return (
-        <Routes>
-            <Route element={<Layout />}></Route>
-        </Routes>
+        <URBANOVAShoppingCartTouchFlow />
+        // <Routes>
+        //   <Route element={<Layout />}>
+
+        //   </Route>
+        // </Routes>
     );
 }
 
