@@ -1,39 +1,23 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import LoginPage from "./pages/Login/LoginPage";
+import ShopCartPage from './pages/Shopcart/ShopCartPage'
+import ProductDetailsPage from './pages/ProductDetails/ProductDetailsPage'
 
-
-function App() {
+export default function App() {
   return (
     <>
-    <Navbar />
-    <Footer />
-  {/* <Routes>
+  <Routes>
     <Route element={<Layout />}>
-      <Route path="/" element={<Home />} />
-      <Route path="/men" element={<Men />} />
-      <Route path="/women" element={<Women />} />
-      <Route path="/shop" element={<Shop />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+      path="/cart"
+      element={<ShopCartPage />}
+      />
+    <Route path="/product" element={<ProductDetailsPage />} />
     </Route>
-  </Routes> */}
+  </Routes>
   </>
   )
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import URBANOVAShoppingCartTouchFlow from "./pages/Shopcart/URBANOVAShoppingCartTouchFlow";
-
-function App() {
-    return (
-        <URBANOVAShoppingCartTouchFlow />
-        // <Routes>
-        //   <Route element={<Layout />}>
-
-        //   </Route>
-        // </Routes>
-    );
 }
-
-export default App;
