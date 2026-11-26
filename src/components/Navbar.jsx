@@ -1,13 +1,18 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import searchIcon from "../assets/navbar/search.png";
 import cart from "../assets/navbar/cart.png";
 import fav from "../assets/navbar/fav.png";
 
+function choosenRoute(props) { //props is object
+  return props.isActive ? "text-blue-600" : "";
+}
+
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0  w-full bg-white">
+    <header className="sticky top-0 z-10 w-full bg-white">
 
       <div className="w-full bg-[#F5F5F5] py-2 text-center text-xs tracking-wide text-[#444444]">
         FREE WORLDWIDE SHIPPING ON ORDERS OVER $200 //{' '}
@@ -26,20 +31,20 @@ export default function Navbar() {
 
 
         <ul className="m-0 flex list-none items-center gap-8 p-0 text-sm font-semibold uppercase text-[#222]">
-          <li className="text-blue-600">
-            <Link to="/new-arrivals">New Arrivals</Link>
+          <li className="hover:text-blue-600 transition-colors">
+            <NavLink to="/new-arrivals" className={choosenRoute}>New Arrivals</NavLink>
           </li>
           <li className="hover:text-blue-600 transition-colors">
-            <Link to="/men">Men</Link>
+            <NavLink to="/men" className={choosenRoute}>Men</NavLink>
           </li>
           <li className="hover:text-blue-600 transition-colors">
-            <Link to="/women">Women</Link>
+            <NavLink to="/women" className={choosenRoute}>Women</NavLink>
           </li>
           <li className="hover:text-blue-600 transition-colors">
-            <Link to="/collections">Collections</Link>
+            <NavLink to="/collections" className={choosenRoute}>Collections</NavLink>
           </li>
           <li className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
-            <Link to="/sale">Sale</Link>
+            <NavLink to="/sale" className={choosenRoute}>Sale</NavLink>
             <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
           </li>
         </ul>

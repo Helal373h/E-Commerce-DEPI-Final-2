@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/Login/LoginPage"; 
 import CartPage from "./pages/Cart/CartPage";
 
-function App() {
+export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />  
@@ -12,5 +12,3 @@ function App() {
     </Routes>
   );
 }
-
-export default App;
