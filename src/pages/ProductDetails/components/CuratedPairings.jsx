@@ -1,86 +1,178 @@
-import placeholder0 from "/src/assets/Shopcart/placeholder0.png";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import placeholder0 from "/src/assets/Shopcart/placeholder0.png";
 
 const pairings = [
     {
         id: 1,
         name: "AERO MODULAR CARGO TROUSER",
-        price: "$220"
+        price: "$220",
+        category: "PANTS // SS25",
+        tag: "IN STOCK",
     },
     {
         id: 2,
-        name: "CYBER-TREAD ALL-TERRAIN RUNNER",
-        price: "$360"
-    }
+        name: "STRATA HYPER-TRACTION SHOE",
+        price: "$295",
+        category: "FOOTWEAR // LAB",
+        tag: "LIMITED DROP",
+    },
+    {
+        id: 3,
+        name: "ECHO DISTORTION HEAVY TEE",
+        price: "$95",
+        category: "TOPS // 300GSM",
+        tag: "ORGANIC COTTON",
+    },
+    {
+        id: 4,
+        name: "VECTOR MODULAR HOLSTER SLING",
+        price: "$140",
+        category: "ACCESSORIES // GEAR",
+        tag: "FIDLOCK® SPEC",
+    },
+    {
+        id: 5,
+        name: "TACTICAL OVERSIZED JACKET",
+        price: "$340",
+        category: "OUTERWEAR // SS25",
+        tag: "NEW ARRIVAL",
+    },
+    {
+        id: 6,
+        name: "URBAN TECH CARGO SHORTS",
+        price: "$180",
+        category: "BOTTOMS // TECH",
+        tag: "LIMITED DROP",
+    },
 ];
 
+const VISIBLE = 4;
+
 export default function CuratedPairings() {
+    const [start, setStart] = useState(0);
+
+    const canPrev = start > 0;
+    const canNext = start + VISIBLE < pairings.length;
+
+    function handlePrev() {
+        if (canPrev) {
+            setStart(start - 1);
+        }
+    }
+
+    function handleNext() {
+        if (canNext) {
+            setStart(start + 1);
+        }
+    }
+
+    const end = Math.min(start + VISIBLE, pairings.length);
+
+    function displayPairings() {
+        const result = [];
+
+        for (let i = start; i < end; i++) {
+            const item = pairings[i];
+
+            result.push(
+                <Link
+                    to={`/product/${item.id}`}
+                    key={item.id}
+                    className="overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                >
+                    {/* Product Image */}
+                    <div className="relative">
+                        <img
+                            src={placeholder0}
+                            alt={item.name || "Product"}
+                            className="aspect-[3/4] w-full object-cover"
+                        />
+
+                        {/* Product Tag */}
+                        {item.tag && (
+                            <span className="absolute top-3 left-3 rounded-full bg-white px-3 py-1 text-[11px] font-bold text-slate-700">
+                                {item.tag}
+                            </span>
+                        )}
+                    </div>
+
+                    {/* Product Details */}
+                    <div className="p-4">
+
+                        {/* Category */}
+                        {item.category && (
+                            <p className="text-[11px] font-bold tracking-wide text-slate-400">
+                                {item.category}
+                            </p>
+                        )}
+
+                        {/* Product Name */}
+                        {item.name && (
+                            <h3 className="mt-2 text-[20px] font-extrabold leading-snug text-slate-900">
+                                {item.name}
+                            </h3>
+                        )}
+
+                        {/* Price */}
+                        {item.price && (
+                            <div className="mt-4 text-[28px] font-extrabold text-slate-900">
+                                {item.price}
+                            </div>
+                        )}
+                    </div>
+                </Link>
+            );
+        }
+
+        return result;
+    }
+
     return (
-        <section
-            aria-labelledby="pairings-title"
-            className="mx-auto max-w-[1280px] border-t border-slate-200 px-5 py-16 md:px-12"
-        >
-            <div className="mb-7 flex items-end justify-between">
+        <section className="mx-auto w-full max-w-[1440px] px-5 py-16 md:px-8">
+
+            {/* Heading + Navigation */}
+            <div className="mb-8 flex items-end justify-between">
+
                 <div>
-                    <p className="font-mono text-[10px] font-extrabold tracking-[0.16em] text-blue-600">
+                    <p className="font-mono text-[12px] font-extrabold tracking-[0.16em] text-blue-600">
                         TACTICAL ENSEMBLE // COMPLETE THE DROP
                     </p>
-                    <h2
-                        id="pairings-title"
-                        className="mt-1 text-[22px] font-extrabold tracking-[-0.035em] text-slate-900"
-                    >
+
+                    <h2 className="mt-1 text-[30px] font-extrabold tracking-[-0.035em] text-slate-900">
                         CURATED PAIRINGS
                     </h2>
                 </div>
+
+                {/* Carousel Buttons */}
                 <div className="flex gap-2">
                     <button
                         type="button"
                         aria-label="Previous"
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500"
+                        onClick={handlePrev}
+                        disabled={!canPrev}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:cursor-pointer hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-slate-500"
                     >
                         ←
                     </button>
+
                     <button
                         type="button"
                         aria-label="Next"
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500"
+                        onClick={handleNext}
+                        disabled={!canNext}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:cursor-pointer hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-slate-500"
                     >
                         →
                     </button>
                 </div>
             </div>
 
+            {/* Products Grid */}
             <div className="grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-                {pairings.map((item) => (
-                    <Link
-                        to={`/products/${item.id}`}
-                        key={item.name}
-                        className="rounded-2xl border border-slate-200 bg-white p-4"
-                    >
-                        <div className="relative">
-                            <img
-                                src={placeholder0}
-                                alt={item.name}
-                                className="aspect-square w-full rounded-xl object-cover"
-                            />
-                            <span className="absolute left-3 top-3 rounded-md bg-slate-900/90 px-3 py-1 text-[9px] font-bold tracking-wide text-white">
-                                {item.label}
-                            </span>
-                        </div>
-                        <div className="mt-5 flex justify-between gap-2">
-                            <span className="text-[10px] font-bold tracking-wide text-slate-400">
-                                {item.tag}
-                            </span>
-                            <span className="text-[12px] font-extrabold text-slate-900">
-                                {item.price}
-                            </span>
-                        </div>
-                        <h3 className="mt-2 text-[12px] font-extrabold text-slate-900">
-                            {item.name}
-                        </h3>
-                    </Link>
-                ))}
+                {displayPairings()}
             </div>
+
         </section>
     );
 }
