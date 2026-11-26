@@ -24,10 +24,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-[#f8f9fb] flex flex-col">
-      {/* النافبار ثابتة في الأعلى وتغطي على أي محتوى يمر تحتها */}
-      <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
-        <Navbar />
-      </header>
+
 
       {/* الشريط العلوي لحالة السيرفر */}
       <div className="relative z-10">
